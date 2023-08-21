@@ -23,8 +23,11 @@ const resolvers = {
         products: () => {
             return products
         },
-        product: (parent, args, context) => {
-            products.find(product => product.id === args.id)
+        product: (_, args, _) => {
+            const product = products.find(product => product.id === args.id)
+            if (!product)
+                return null;
+            return product;
         },
     }
 };
